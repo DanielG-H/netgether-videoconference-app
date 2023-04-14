@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid px-4 py-5 my-5 text-center">
+	<div class="lc-block mb-4">
+		<div editable="rich">
+			<h2 class="display-2 fw-bold">Network <span class="text-primary">Together!</span></h2>
+		</div>
+	</div>
+	<div class="lc-block col-lg-6 mx-auto mb-5">
+		<div editable="rich">
+			NetGether is a real-time conference application where you can host meetings and message your peers through a LAN.
+			<p class="lead"></p>
+		</div>
+	</div>
+
+	<div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+		<a class="btn btn-primary btn-lg px-4 gap-3" role="button" asp-controller="Home" asp-action="SignUp">Sign Up</a>
+		<a class="btn btn-outline-secondary btn-lg px-4" role="button" asp-controller="Home" asp-action="SignIn">Log In</a>
+	</div>
+	<div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center">
+		<img class="img-fluid" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" srcset="" sizes="" alt="" width="" height="783">
+	</div>
+</div>

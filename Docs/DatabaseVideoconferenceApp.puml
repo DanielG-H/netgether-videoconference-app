@@ -1,0 +1,56 @@
+@startuml DatabaseVideoconferenceApp
+
+!define ENTITY MODIFIER abstract
+!define MASEFIELD 45
+
+title Database design for VideoconferenceApp
+
+entity User {
+  * user_id : int <<generated>>
+  * username : varchar(MASEFIELD)
+  * password : varchar(MASEFIELD)
+}
+
+entity ChatRoom {
+  * room_id : int <<generated>>
+  * room_name : varchar(MASEFIELD)
+  * created_by : int <<FK>>
+}
+
+entity File {
+  * file_id : int <<generated>>
+  * file_name : varchar(MASEFIELD)
+  * file_type : varchar(MASEFIELD)
+  * file_size : int
+  * uploaded_by : int <<FK>>
+  * uploaded_at : datetime
+  * comment_id : int <<FK>>
+}
+
+entity Comment {
+  * comment_id : int <<generated>>
+  * created_by : int <<FK>>
+  * created_at : datetime
+  text : varchar(200)
+}
+
+entity UserChatRoom {
+  * id : int <<generated>>
+  * user_id : int <<FK>>
+  * room_id : int <<FK>>
+}
+
+entity RoomComment {
+  * id : int <<generated>>
+  * room_id : int <<FK>>
+  * comment_id : int <<FK>>
+}
+
+User --{ UserChatRoom
+User -- ChatRoom
+ChatRoom --{ UserChatRoom
+File -- Comment
+Comment --{ RoomComment
+ChatRoom --{ RoomComment
+
+@enduml

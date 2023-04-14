@@ -1,0 +1,286 @@
+﻿@{
+    Layout = "";
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
+
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #e1e5f2;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #022b3a;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #bfdbf7;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidebar .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        .chat {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #022b3a;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .chat a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #bfdbf7;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .chat a:hover {
+                    color: #f1f1f1;
+                }
+
+            .chat .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #022b3a;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+
+            .openbtn:hover {
+                background-color: #444;
+            }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        #button-send {
+            margin-top: 7px
+        }
+
+        #button-attach-file {
+            margin-top: 7px
+        }
+
+
+        /*////////////*/ /*///[  Dock  ]///*/ /*////////////*/
+
+        .dockbg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 35px;
+            background: #bbb;
+        }
+
+        .dock {
+            position: fixed;
+            text-align: center;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            line-height: 100px;
+        }
+
+            .dock img {
+                display: inline-block;
+                vertical-align: bottom;
+                height: 50%;
+                padding: 0 5px;
+                /* + your animation properties */
+            }
+
+
+                .dock img:hover {
+                    height: 100%;
+                }
+
+        /*////////////*/ /*////////////*/ /*////////////*/
+
+
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        (max-height: 450px) {
+            .sidebar
+
+        {
+            padding-top: 15px;
+        }
+
+        .sidebar a {
+            font-size: 18px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">Connect</a>
+        <a href="#">Disconnect</a>
+        <a href="#"></a>
+        <a hred="#"> <i class="bi bi-box-arrow-left"></i></a>
+    </div>
+    <div id="myChat" class="chat">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeChat()">×</a>
+        <a href="#">Chat</a>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-2 col-lg-11">
+                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                    <div class="card-body p-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p>Type your note, and hit enter to add it</p>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
+                                             height="25" />
+                                        <p class="small mb-0 ms-2">Martha</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p>Type your note, and hit enter to add it</p>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="25"
+                                             height="25" />
+                                        <p class="small mb-0 ms-2">Johny Blaze</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p>Type your note, and hit enter to add it</p>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp" alt="avatar" width="25"
+                                             height="25" />
+                                        <p class="small mb-0 ms-2">Mary Jane</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline">
+                            <input type="text" id="addANote" class="form-control" placeholder="Type comment..." />
+                            <button id="button-send" type="submit" class="btn btn-primary mb-8" for="addANote">+ Add </button>
+                            <file id="button-attach-file"type="button" class="btn btn-secondary"> <i class="bi bi-paperclip">File</i></file>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+        <!--  <button class="openbtn" onclick="openNav()">☰</button>  -->
+        <h2>Body...</h2>
+        <p>Work in progress...</p>
+    </div>
+
+    <div class="dockbg"></div>
+    <div class="dock">
+        <button class="openbtn" onclick="openNav()">☰</button>
+        <button class="openbtn" onclick="openChat()">	➥</button>
+    </div>
+
+    <script src=" https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.4/dist/browser/signalr.min.js "></script>
+
+    <script>
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chat").build();
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString())
+        });
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+
+        }
+
+        function openChat() {
+            document.getElementById("myChat").style.width = "450px";
+            document.getElementById("main").style.marginRight = "450px";
+        }
+
+        function sendComment() {
+            document.getElementById("button-send")
+        }
+
+        function closeChat() {
+            document.getElementById("myChat").style.width = "0";
+            document.getElementById("main").style.marginRight = "0";
+        }
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html> 
