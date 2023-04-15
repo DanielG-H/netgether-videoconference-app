@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Net;
 using VideoconferenceApp.Database;
 using VideoconferenceApp.Models;
 
@@ -30,6 +29,13 @@ namespace VideoconferenceApp.Controllers
             {
                 ModelState.AddModelError("password", "The Password cannot be the same as Username");
             }
+
+            User? user = _databaseContext.Users.FirstOrDefault(u => u.Username == obj.Username);
+            if (user != null)
+            {
+                ModelState.AddModelError("username", "Username already exists please choose another one");
+            }
+
             if (ModelState.IsValid)
             {
                 _databaseContext.Users.Add(obj);

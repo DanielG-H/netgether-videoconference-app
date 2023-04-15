@@ -21,7 +21,7 @@ entity File {
   * file_id : int <<generated>>
   * file_name : varchar(MASEFIELD)
   * file_type : varchar(MASEFIELD)
-  * file_size : int
+  * attachment : byte
   * uploaded_by : int <<FK>>
   * uploaded_at : datetime
   * comment_id : int <<FK>>
