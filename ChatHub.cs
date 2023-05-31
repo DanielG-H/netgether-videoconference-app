@@ -5,9 +5,18 @@ namespace VideoconferenceApp
 {
     public class ChatHub : Hub
     {
-        public async Task SendComment(User user, Comment comment)
+        [HubMethodName("SendComment")]
+        public async Task SendComment(int userId, string comment)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user.Username, comment.Text);
+            Comment message = new Comment
+            {
+                CommentId = 0,
+                CreatedAt = DateTime.Now,
+                CreatedBy = userId,
+                Text = comment
+            };
+
+            await Clients.All.SendAsync("ReceiveComment", comment);
         }
     }
 }

@@ -2,8 +2,11 @@
 
 namespace VideoconferenceApp.Models
 {
-	public class User
+    [Serializable]
+    public class User
 	{
+		public User() { }
+
 		[Key]
 		public int UserId { get; set; }
 
