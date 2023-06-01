@@ -1,14 +1,13 @@
 ﻿@model User
 @{ 
     Layout = "";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Chat Room";
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/room.css" />
 </head>
@@ -96,6 +95,7 @@
     <!-- webRTC API -->
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- signalR -->
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script type="text/javascript">
         function openNav() {
@@ -136,11 +136,18 @@
             });
         }
 
+        function isBlank(str) {
+            return (!str || /^\s*$/.test(str));
+        }
+
         // handles sending a comment and is called on Enter or on Click
         function handleSendComment() {
             var comment = document.getElementById("addComment").value;
-            sendComment(@Model.UserId, comment);
-            document.getElementById("addComment").value = "";
+            if (!isBlank(comment)) {
+                console.log("Comment to send: " + comment);
+                sendComment(@Model.UserId, comment);
+                document.getElementById("addComment").value = "";
+            }
         }
 
         // add event listener to button click
@@ -156,16 +163,22 @@
             }
         })
 
-        connection.on("ReceiveComment", function (comment) {
-            // handle the received commenty
-            displayMessage(@Model.Username, comment);
-        });
-
-        function displayComment(username, comment) {
-            var messageElement = document.createElement("div");
+        function displayComment(comment) {
+            var messageElement = document.createElement("p");
+            var username = "@Model.Username";
+            console.log("Displayed comment: " + comment + "\nUsername: " + username);
             messageElement.textContent = username + ": " + comment;
-            document.getElementById("card-body p-4").appendChild(messageElement);
+            var cardBody = document.querySelector(".card-body")
+            if (cardBody) {
+                cardBody.appendChild(messageElement);
+            }
         }
+
+        connection.on("ReceiveComment", function (comment) {
+            // handle the received comment
+            console.log("Received comment: " + comment);
+            displayComment(comment);
+        });
     </script>
 </body>
 </html> 
