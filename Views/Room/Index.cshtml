@@ -167,10 +167,44 @@
             var messageElement = document.createElement("p");
             var username = "@Model.Username";
             console.log("Displayed comment: " + comment + "\nUsername: " + username);
-            messageElement.textContent = username + ": " + comment;
-            var cardBody = document.querySelector(".card-body")
-            if (cardBody) {
-                cardBody.appendChild(messageElement);
+            var commentContainer = document.createElement("div");
+            commentContainer.classList.add("card", "mb-4");
+
+            var cardBodyElement = document.createElement("div");
+            cardBodyElement.classList.add("card-body");
+
+            var messageElement = document.createElement("p");
+            messageElement.textContent = comment;
+
+            var usernameElement = document.createElement("p");
+            usernameElement.classList.add("small", "mb-0", "ms-2");
+            usernameElement.textContent = username;
+
+            var avatarElement = document.createElement("img");
+            avatarElement.src = "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp";
+            avatarElement.alt = "avatar";
+            avatarElement.width = 25;
+            avatarElement.height = 25;
+
+            var flexContainerElement = document.createElement("div");
+            flexContainerElement.classList.add("d-flex", "justify-content-between");
+
+            var flexRowElement = document.createElement("div");
+            flexRowElement.classList.add("d-flex", "flex-row", "align-items-center");
+
+            flexRowElement.appendChild(avatarElement);
+            flexRowElement.appendChild(usernameElement);
+
+            flexContainerElement.appendChild(flexRowElement);
+
+            cardBodyElement.appendChild(messageElement);
+            cardBodyElement.appendChild(flexContainerElement);
+
+            commentContainer.appendChild(cardBodyElement);
+
+            var commentBox = document.querySelector("#myChat .form-outline");
+            if (commentBox && commentBox.parentNode) {
+                commentBox.parentNode.insertBefore(commentContainer, commentBox);
             }
         }
 
