@@ -6,12 +6,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSignalR();
+builder.Services.AddSignalR().AddHubOptions<ChatHub>(options =>
+{
+    options.EnableDetailedErrors = true;
+});
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(
     // passes SqlServer options with the given connection string
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -33,16 +42,20 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseWebSockets();
+
+app.UseSession();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
-    endpoints.MapHub<ChatHub>("/chat")
-);
-
-app.MapControllerRoute(
+{
+    endpoints.MapHub<ChatHub>("/Room/Index");
+    endpoints.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.Run();
